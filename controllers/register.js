@@ -10,7 +10,7 @@ const register = async (req, res) => {
         });
     }
 
-    db.query("SELECT * FROM user WHERE username = ? OR email = ?", [username, email], async (err, results) => {
+    db.query("SELECT * FROM users WHERE username = ? OR email = ?", [username, email], async (err, results) => {
         if (err) {
             console.error("Error querying database:", err);
             return res.status(500).json({ message: "Database query failed." });
@@ -34,7 +34,7 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         db.query(
-            "INSERT INTO user (name, username, password, email) VALUES (?, ?, ?, ?)",
+            "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?)",
             [name, username, hashedPassword, email],
             (err, results) => {
                 if (err) {

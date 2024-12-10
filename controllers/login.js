@@ -13,7 +13,7 @@ const login = async (req, res) => {
 
     // Query untuk mengambil pengguna berdasarkan username atau email
     db.query(
-        "SELECT * FROM user WHERE username = ? OR email = ?",
+        "SELECT * FROM users WHERE username = ? OR email = ?",
         [identifier, identifier],
         async (err, results) => {
             if (err) {

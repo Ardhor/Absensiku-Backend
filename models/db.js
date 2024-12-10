@@ -4,9 +4,9 @@ const mysql = require("mysql");
 const db = mysql.createConnection({
     host: "localhost",
     user: "root", // Ganti dengan username MySQL Anda jika diperlukan
-    password: "root", // Ganti dengan password MySQL Anda jika diperlukan
-    database: "absensiku", // Nama database yang digunakan
-    port: 8889, // Port MySQL yang benar (default 3306, ganti jika perlu)
+    password: "", // Ganti dengan password MySQL Anda jika diperlukan
+    database: "absensiku_api", // Nama database yang digunakan
+    port: 3306, // Port MySQL yang benar (default 3306, ganti jika perlu)
 });
 
 // Melakukan koneksi ke database
