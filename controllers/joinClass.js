@@ -19,10 +19,10 @@ const joinClass = async (req, res) => {
             return res.status(404).json({ message: "Username tidak terdaftar." });
         }
 
-        const user_id = userResults[0].user_id; // id sudah diganti menjadi user_id karena pada pemanggilan querynya menggunakan as
+        const user_id = userResults[0].user_id; // id sudah diganti menjadi user_id karena pada pemanggilan querynya menggunakan as user_id
 
         // Cari kelas berdasarkan kode kelas
-        db.query('SELECT id AS class_id FROM classes WHERE code_class = ?', [code_class], (err, classResults) => {
+        db.query('SELECT * FROM classes WHERE code_class = ?', [code_class], (err, classResults) => {
             if (err) {
                 console.error('Error querying classes: ', err);
                 return res.status(500).json({ message: "Database error." });
@@ -32,19 +32,19 @@ const joinClass = async (req, res) => {
                 return res.status(404).json({ message: "Class tidak ada." });
             }
 
-            const class_id = classResults[0].class_id; // id sudah diganti menjadi class_id karena pada pemanggilan querynya menggunakan as
+            const class_id = classResults[0].id; // 
 
             // Memeriksa apakah user sudah tergabung di kelas
             db.query(
                 'SELECT * FROM class_members WHERE class_id = ? AND user_id = ?',
                 [class_id, user_id],
-                (err, enrollResults) => {
+                (err, memberResults) => {
                     if (err) {
                         console.error('Error querying enrollments: ', err);
                         return res.status(500).json({ message: "Database error." });
                     }
 
-                    if (enrollResults.length > 0) {
+                    if (memberResults.length > 0) {
                         return res.status(400).json({ message: "Anda sudah terdaftar di kelas ini." });
                     }
 

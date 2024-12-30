@@ -49,7 +49,11 @@ const login = async (req, res) => {
             }
 
             // Jika login berhasil
-            res.status(200).json({ message: "Login successful!", userId: user.id });
+            return res.status(200).json({ 
+                message: "Login successful!", 
+                user_id: user.id,
+                username: user.username 
+            });
         }
     );
 };
